@@ -40,6 +40,14 @@ public class MainGame extends AppCompatActivity {
 
     }
 
+    public void waitit(){
+        try {
+            wait(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public Resources getResources() {

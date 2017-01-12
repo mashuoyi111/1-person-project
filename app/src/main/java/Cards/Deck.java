@@ -244,10 +244,13 @@ public class Deck {
 
                     }
                     Bitmap bTemp=Bitmap.createScaledBitmap(getBitmapFromFile(bitTemp),380,551,false);
+
                     deckTemp.add(new Card(j, i, bTemp));
                 }
             }
         }
+        Bitmap bTemp=Bitmap.createScaledBitmap(getBitmapFromFile(R.drawable.black_joker),380,551,false);
+        deckTemp.add(new Card(0, 14, bTemp));
         return deckTemp;
     }
 

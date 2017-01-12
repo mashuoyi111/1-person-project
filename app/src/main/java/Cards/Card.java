@@ -14,9 +14,9 @@ import com.example.administrator.a1_person_project.R;
 public class Card {
     //This class contains all the information of one poker card
     private int type;
-    //type:1 is clubs,2 is diamonds, 3 is hearts, 4 is spades
+    //type:1 is clubs,2 is diamonds, 3 is hearts, 4 is spades, 0 is joker
     private int number;
-    // 1 means ace, 2 means two......13 means king
+    // 1 means ace, 2 means two......13 means king, 14 is black joker, 15 is red joker
     Bitmap cardPic;
     public Card(int type,int number,Bitmap cardPic){
         this.type=type;

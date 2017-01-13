@@ -125,6 +125,12 @@ public class MainGame extends AppCompatActivity {
         if(cancelledOut) {
             Button b = (Button) findViewById(R.id.buttonCancelOut);
             b.setText("Pick one card!");
+            b.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
 
     }

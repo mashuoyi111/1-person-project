@@ -13,13 +13,56 @@
         android:id="@+id/textView2" />
 
     <Button
-        android:text="cancel out"
+        android:text="Pick this card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonCancelOut"
-        android:onClick="cancelOut"
-        />
+        android:onClick="cancelOut" />
 
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:weightSum="4">
+
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/leftButton"
+            android:layout_weight="1"
+            android:background="@drawable/left_arrow"
+            />
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/upButton"
+            android:layout_weight="1"
+            android:background="@drawable/up_arrow"
+            />
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/downButton"
+            android:layout_weight="1"
+            android:background="@drawable/down_arrow"
+            />
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rightButton"
+            android:layout_weight="1"
+            android:background="@drawable/right_arrow"
+            />
+    </LinearLayout>
 
     <com.example.administrator.a1_person_project.CardView
         android:layout_width="fill_parent"

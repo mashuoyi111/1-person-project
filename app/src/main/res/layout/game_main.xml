@@ -20,11 +20,19 @@
         />
 
 
-    <TextView
-        android:text="TextView"
+    <Button
+        android:text="shuffle the order"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:id="@+id/textView3" />
+        android:layout_height="wrap_content"
+        android:onClick="shuffleCards"
+        android:id="@+id/shuffleCard" />
+
+    <Button
+        android:text="order cards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="orderCards"
+        android:id="@+id/button2" />
 
     <com.example.administrator.a1_person_project.CardView
         android:layout_width="fill_parent"

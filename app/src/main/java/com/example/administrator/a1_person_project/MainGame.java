@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
 
+import java.util.ArrayList;
+import Cards.Card;
 import Cards.Cards;
 import Cards.Deck;
 
@@ -28,7 +30,7 @@ public class MainGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         deck=new Deck(this,1);
-        Cards cds=deck.getCards(20);
+        Cards cds=deck.getCards(10);
         this.currentCards =cds;
         setContentView(R.layout.game_main);
 //        CardView cardView=(CardView) findViewById(R.id.cardView);
@@ -40,13 +42,6 @@ public class MainGame extends AppCompatActivity {
 
     }
 
-    public void waitit(){
-        try {
-            wait(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
     public Deck getDeck() {
         return deck;
@@ -58,32 +53,42 @@ public class MainGame extends AppCompatActivity {
 
     public void cancelOut(View view){
         int size=currentCards.getNumOfCards();
-        for(int i=0;i<currentCards.getNumOfCards();i++){
+        ArrayList<Card> addTemp=new ArrayList<Card>();
+        for(int i=0;i<size;i++){
             int cardTemp=currentCards.getCard(i).getNumber();
-            for(int j=0;j<currentCards.getNumOfCards();j++){
+            for(int j=0;j<size;j++){
                 int cardTemp2=currentCards.getCard(j).getNumber();
                 if(cardTemp==cardTemp2&&i!=j){
-                    if(currentCards.getCardType(cardTemp)!=-1||currentCards.getCardType(cardTemp2)!=-1)
-                    currentCards.setCardType(cardTemp,-1);
-                    currentCards.setCardType(cardTemp2,-1);
-                    //                   cancelOut();
-                    //                   return;
+                    if(currentCards.getCardType(i)!=-1&&currentCards.getCardType(j)!=-1) {
+                        currentCards.setCardType(i, -1);
+                        currentCards.setCardType(j, -1);
+                    }
                 }
             }
         }
-        for(int i=0;i<currentCards.getNumOfCards();i++){
-            if(currentCards.getCard(i).getType()==-1){
-                currentCards.pop(i);
+        for(int i=0;i<size;i++){
+            if(currentCards.getCard(i).getType()!=-1){
+                addTemp.add(currentCards.getCard(i));
             }
         }
 
-        if(size!=currentCards.getNumOfCards()) {
+        if(addTemp.size()>0) {
+            currentCards.setCards(addTemp);
             setContentView(R.layout.game_main);
         }
     //    onContentChanged();
     }
 
 
+    public void shuffleCards(View view){
+        currentCards.shuffleCards();
+        setContentView(R.layout.game_main);
+    }
+
+    public void orderCards(View view){
+        currentCards.orderCards();
+        setContentView(R.layout.game_main);
+    }
 
     @Override
     public Resources getResources() {

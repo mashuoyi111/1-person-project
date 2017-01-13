@@ -24,9 +24,29 @@ public class Cards{
     }
 
     public Card pop(int index){
-        Card temp=cards.get(index);
-        cards.remove(index);
-        return temp;
+        if(index>0||index<cards.size()) {
+            Card temp = cards.get(index);
+            cards.remove(index);
+            return temp;
+        }else{
+            return null;
+        }
+    }
+
+    public void orderCards(){
+        ArrayList<Card> temp=new ArrayList<Card>();
+        for(int j=1;j<16;j++) {
+            for (int i = 0; i < getNumOfCards(); i++) {
+                if(cards.get(i).getNumber()==j){
+                    temp.add(cards.get(i));
+                }
+            }
+        }
+        cards=temp;
+    }
+
+    public void setCards(ArrayList<Card> cards) {
+        this.cards = cards;
     }
 
     public Integer getNumOfCards(){

@@ -56,10 +56,10 @@ public class CardView extends View implements View.OnClickListener {
                 int botnum = 14;
                 for (int i = 0; i < numofcards; i++) {
                     Card cardTemp = cards.getCards().get(i);
-                    if (i < topnum) {
-                        canvas.drawBitmap(cardTemp.getCardPic(), i * 70, heightTempT, null);
+                    if (i < botnum) {
+                        canvas.drawBitmap(cardTemp.getCardPic(), i * 70, heightTempB, null);
                     } else {
-                        canvas.drawBitmap(cardTemp.getCardPic(), (i - topnum) * 70, heightTempB, null);
+                        canvas.drawBitmap(cardTemp.getCardPic(), (i - botnum) * 70, heightTempT, null);
                     }
                 }
 

@@ -86,7 +86,7 @@ public class MainGame extends AppCompatActivity {
         }
         cancelledOut=true;
         Button b=(Button) findViewById(R.id.buttonCancelOut);
-        b.setText("Pick one card from!");
+        b.setText("Pick one card from another Player!");
     //    onContentChanged();
     }
 
@@ -98,7 +98,7 @@ public class MainGame extends AppCompatActivity {
 
     public void orderCards(View view){
         currentCards.orderCards();
-        currentCards=currentCards.getBackCopy();
+//        currentCards=currentCards.getBackCopy();
         setContentView(R.layout.game_main);
     }
 

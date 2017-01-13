@@ -33,6 +33,15 @@ public class Cards{
         return cards.size();
     }
 
+    public void setCardType(int index, int type){
+        cards.get(index).setType(type);
+    }
+
+
+    public int getCardType(int index){
+        return cards.get(index).getType();
+    }
+
     public void shuffleCards(){
         Collections.shuffle(cards);
     }

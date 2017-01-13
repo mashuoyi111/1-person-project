@@ -24,6 +24,10 @@ public class Card {
         this.cardPic=cardPic;
     }
 
+    public void setType(int type) {
+        this.type=type;
+    }
+
     public int getType() {
         return type;
     }

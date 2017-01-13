@@ -39,14 +39,14 @@ public class MainGame extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        deck=new Deck(this,1);
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        screenHeight=displaymetrics.heightPixels;
+        screenWidth=displaymetrics.widthPixels;
+        deck=new Deck(this,1,screenHeight,screenWidth);
         cancelledOut=false;
         Cards cds=deck.getCards(27);
         this.currentCards =cds;
         setContentView(R.layout.game_main);
-        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        screenHeight=displaymetrics.heightPixels;
-        screenWidth=displaymetrics.widthPixels;
 
     }
 
@@ -57,6 +57,14 @@ public class MainGame extends AppCompatActivity {
 
     public Cards getCards() {
         return currentCards;
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
     }
 
     public void cancelOut(View view){

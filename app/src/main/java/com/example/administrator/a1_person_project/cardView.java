@@ -29,6 +29,8 @@ import Cards.Cards;
 public class CardView extends View {
     Context context;
     private Cards cards;
+    private int screenWidth;
+    private int cardGap;
 
     public CardView(Context context,AttributeSet attrs) {
         super(context);
@@ -36,6 +38,12 @@ public class CardView extends View {
         cards=new Cards(context,new ArrayList<Card>());
         MainGame host=(MainGame) this.getContext();
         cards=host.getCards();
+        screenWidth=host.getScreenWidth();
+        setCardGap(screenWidth);
+    }
+
+    private void setCardGap(int screenWidth) {
+        cardGap=(70*screenWidth)/1080;
     }
 
 
@@ -57,9 +65,9 @@ public class CardView extends View {
                 for (int i = 0; i < numofcards; i++) {
                     Card cardTemp = cards.getCards().get(i);
                     if (i < botnum) {
-                        canvas.drawBitmap(cardTemp.getCardPic(), i * 70, heightTempB, null);
+                        canvas.drawBitmap(cardTemp.getCardPic(), i * cardGap, heightTempB, null);
                     } else {
-                        canvas.drawBitmap(cardTemp.getCardPic(), (i - botnum) * 70, heightTempT, null);
+                        canvas.drawBitmap(cardTemp.getCardPic(), (i - botnum) * cardGap, heightTempT, null);
                     }
                 }
 
@@ -68,7 +76,7 @@ public class CardView extends View {
                 //heightTemp is the height that make the cards display at 3/4 of the screen;
                 for (int i = 0; i < numofcards; i++) {
                     Card cardTemp = cards.getCards().get(i);
-                    canvas.drawBitmap(cardTemp.getCardPic(), i * 70, heightTemp, null);
+                    canvas.drawBitmap(cardTemp.getCardPic(), i * cardGap, heightTemp, null);
                     Paint paint = new Paint();
                     paint.setColor(Color.BLACK);
                     paint.setTextSize(100);

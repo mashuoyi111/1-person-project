@@ -19,12 +19,24 @@ public class Deck {
     private ArrayList<Card> deck=new ArrayList<Card>();
     private int numOfDeck;
     private Context context;
+    private int screenHeight;
+    private int screenWidth;
+    private int cardHeight;
+    private int cardWidth;
 
-    public Deck(Context context, int numOfDeck){
+    public Deck(Context context, int numOfDeck,int height, int width){
         this.context=context;
         this.numOfDeck=numOfDeck;
+        this.screenHeight=height;
+        this.screenWidth=width;
+        setCardSize(screenHeight,screenWidth);
         deck=createDeck();
         shuffleCards();
+    }
+
+    private void setCardSize(int screenHeight, int screenWidth) {
+        cardHeight=(551*screenHeight)/1920;
+        cardWidth=(380*screenWidth)/1080;
     }
 
     public ArrayList<Card> getDeck() {
@@ -243,13 +255,13 @@ public class Deck {
                             break;
 
                     }
-                    Bitmap bTemp=Bitmap.createScaledBitmap(getBitmapFromFile(bitTemp),380,551,false);
+                    Bitmap bTemp=Bitmap.createScaledBitmap(getBitmapFromFile(bitTemp),cardWidth,cardHeight,false);
 
                     deckTemp.add(new Card(j, i, bTemp));
                 }
             }
         }
-        Bitmap bTemp=Bitmap.createScaledBitmap(getBitmapFromFile(R.drawable.black_joker),380,551,false);
+        Bitmap bTemp=Bitmap.createScaledBitmap(getBitmapFromFile(R.drawable.black_joker),cardWidth,cardHeight,false);
         deckTemp.add(new Card(0, 14, bTemp));
         return deckTemp;
     }

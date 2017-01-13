@@ -46,7 +46,7 @@ public class Deck {
         for(int i=0;i<num;i++){
             cardsTemp.add(getOneCard());
         }
-        return new Cards(cardsTemp);
+        return new Cards(context,cardsTemp);
     }
 
     public int getNumOfDeck() {

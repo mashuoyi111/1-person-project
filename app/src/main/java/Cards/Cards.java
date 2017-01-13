@@ -1,5 +1,11 @@
 package Cards;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.example.administrator.a1_person_project.R;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -11,8 +17,20 @@ import java.util.Iterator;
 public class Cards{
     // this class contains several cards that kept by one player
     private ArrayList<Card> cards=new ArrayList<Card>();
-    public Cards(ArrayList<Card> cards){
+    public Cards(Context context,ArrayList<Card> cards){
+        this.context=context;
         this.cards=cards;
+    }
+    private Context context;
+
+    public Cards getBackCopy(){
+        ArrayList<Card> cards=new ArrayList<Card>();
+        cards.addAll(this.cards);
+        for(int i=0;i<cards.size();i++){
+            cards.get(i).setCardPic(Bitmap.createScaledBitmap(getBitmapFromFile(R.drawable.card_back),380,551,false));
+        }
+        Cards c=new Cards(this.context,cards);
+        return c;
     }
 
     public ArrayList<Card> getCards() {
@@ -64,6 +82,10 @@ public class Cards{
 
     public void shuffleCards(){
         Collections.shuffle(cards);
+    }
+
+    private Bitmap getBitmapFromFile(int id){
+        return BitmapFactory.decodeResource(context.getResources(),id);
     }
 
 }

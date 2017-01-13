@@ -1,17 +1,21 @@
 package com.example.administrator.a1_person_project;
 
-import android.content.Intent;
+import android.app.ActionBar;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import Cards.Card;
 import Cards.Cards;
 import Cards.Deck;
+import Players.Player;
 
 /**
  * Created by Administrator on 2017/1/10.
@@ -19,23 +23,27 @@ import Cards.Deck;
 
 public class MainGame extends AppCompatActivity {
 
-    private Canvas canvas;
+    private ArrayList<Player> players=new ArrayList<Player>();
     private Deck deck;
     private DisplayMetrics displaymetrics=new DisplayMetrics();
     Cards currentCards;
+    Cards opponentCards;
+    Player currentPlayer;
+    Player opponentPlayer;
+    boolean cancelledOut;
     private int screenHeight;
     private int screenWidth;
+//    public final Bitmap cardBack=Bitmap.createScaledBitmap(BitmapFactory.decodeResource
+//            (this.getResources(),R.drawable.card_back),380,551,false);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         deck=new Deck(this,1);
-        Cards cds=deck.getCards(10);
+        cancelledOut=false;
+        Cards cds=deck.getCards(27);
         this.currentCards =cds;
         setContentView(R.layout.game_main);
-//        CardView cardView=(CardView) findViewById(R.id.cardView);
-//        cardView.setCards(currentCards);
-//        cardView.postInvalidate();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         screenHeight=displaymetrics.heightPixels;
         screenWidth=displaymetrics.widthPixels;
@@ -76,6 +84,9 @@ public class MainGame extends AppCompatActivity {
             currentCards.setCards(addTemp);
             setContentView(R.layout.game_main);
         }
+        cancelledOut=true;
+        Button b=(Button) findViewById(R.id.buttonCancelOut);
+        b.setText("Pick one card from!");
     //    onContentChanged();
     }
 
@@ -87,6 +98,7 @@ public class MainGame extends AppCompatActivity {
 
     public void orderCards(View view){
         currentCards.orderCards();
+        currentCards=currentCards.getBackCopy();
         setContentView(R.layout.game_main);
     }
 
@@ -95,7 +107,19 @@ public class MainGame extends AppCompatActivity {
         return super.getResources();
     }
 
+    @Override
+    public void onBackPressed() {
+    }
 
+    @Override
+    public void setContentView(int id){
+        super.setContentView(id);
+        if(cancelledOut) {
+            Button b = (Button) findViewById(R.id.buttonCancelOut);
+            b.setText("Pick one card!");
+        }
+
+    }
 
 
 }

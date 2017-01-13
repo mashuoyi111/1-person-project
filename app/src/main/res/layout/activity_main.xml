@@ -20,25 +20,27 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:layout_marginBottom="16dp"
-        android:id="@+id/numOfPeople"
-        android:layout_above="@+id/button"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
-
     <TextView
         android:text="Number of People(2-6):"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="40px"
         android:id="@+id/textView"
-        android:layout_alignBaseline="@+id/numOfPeople"
-        android:layout_alignBottom="@+id/numOfPeople"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40px"
+        android:id="@+id/numberOfPlayers"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView"
+        android:spinnerMode="dropdown"
+        />
+
+
 
 </RelativeLayout>

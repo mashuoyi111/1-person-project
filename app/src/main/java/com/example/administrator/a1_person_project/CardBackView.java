@@ -21,16 +21,15 @@ import Cards.Card;
 import Cards.Cards;
 
 
-
 /**
- * Created by Administrator on 2017/1/11.
+ * Created by Administrator on 2017/1/12.
  */
 
-public class CardView extends View {
+public class CardBackView extends View {
     Context context;
     private Cards cards;
 
-    public CardView(Context context,AttributeSet attrs) {
+    public CardBackView(Context context,AttributeSet attrs) {
         super(context);
         this.context=context;
         cards=new Cards(context,new ArrayList<Card>());

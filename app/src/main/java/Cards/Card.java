@@ -17,7 +17,7 @@ public class Card {
     //type:1 is clubs,2 is diamonds, 3 is hearts, 4 is spades, 0 is joker, -1 is about to delete
     private int number;
     // 1 means ace, 2 means two......13 means king, 14 is black joker, 15 is red joker
-    Bitmap cardPic;
+    private Bitmap cardPic;
     public Card(int type,int number,Bitmap cardPic){
         this.type=type;
         this.number=number;
@@ -46,7 +46,15 @@ public class Card {
         return number;
     }
 
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
     public Bitmap getCardPic() {
         return cardPic;
+    }
+
+    public void setCardPic(Bitmap cardPic) {
+        this.cardPic = cardPic;
     }
 }

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import Cards.Card;
+import Cards.Deck;
 import Cards.Cards;
 
 
@@ -52,8 +53,8 @@ public class CardBackView extends View {
         selector=host.getCurrentSelector();
         setCardGap(screenWidth);
         setCardSize(screenHeight,screenWidth);
-        cardBack=Bitmap.createScaledBitmap(getBitmapFromFile(R.drawable.card_back),cardWidth,cardHeight,false);
-        cardBackSelected=Bitmap.createScaledBitmap(getBitmapFromFile(R.drawable.card_back_selected),cardWidth,cardHeight,false);
+        cardBack= Deck.back;
+        cardBackSelected=Deck.backSelected;
     }
 
     private void setCardSize(int screenHeight, int screenWidth) {

@@ -146,6 +146,26 @@ public class MainGame extends AppCompatActivity {
     }
 
 
+    public void moveUp(View view){
+        if(opponentCards.getNumOfCards()>14&&currentSelector<13){
+            if(currentSelector+14<opponentCards.getNumOfCards()){
+                currentSelector+=14;
+                setContentView(R.layout.game_main_pick);
+            }else {
+                currentSelector=opponentCards.getNumOfCards()-1;
+                setContentView(R.layout.game_main_pick);
+            }
+        }
+
+    }
+
+    public void moveDown(View view){
+        if(currentSelector-14>=0){
+            currentSelector-=14;
+            setContentView(R.layout.game_main_pick);
+        }
+    }
+
     @Override
     public Resources getResources() {
         return super.getResources();

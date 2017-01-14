@@ -23,6 +23,8 @@ public class Deck {
     private int screenWidth;
     private int cardHeight;
     private int cardWidth;
+    public static Bitmap back;
+    public static Bitmap backSelected;
 
     public Deck(Context context, int numOfDeck,int height, int width){
         this.context=context;
@@ -32,6 +34,8 @@ public class Deck {
         setCardSize(screenHeight,screenWidth);
         deck=createDeck();
         shuffleCards();
+        back=Bitmap.createScaledBitmap(getBitmapFromFile(R.drawable.card_back),cardWidth,cardHeight,false);
+        backSelected=Bitmap.createScaledBitmap(getBitmapFromFile(R.drawable.card_back_selected),cardWidth,cardHeight,false);
     }
 
     private void setCardSize(int screenHeight, int screenWidth) {

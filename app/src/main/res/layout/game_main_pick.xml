@@ -44,6 +44,7 @@
             android:id="@+id/upButton"
             android:layout_weight="1"
             android:background="@drawable/up_arrow"
+            android:onClick="moveUp"
             />
 
         <Button
@@ -53,6 +54,7 @@
             android:id="@+id/downButton"
             android:layout_weight="1"
             android:background="@drawable/down_arrow"
+            android:onClick="moveDown"
             />
 
         <Button

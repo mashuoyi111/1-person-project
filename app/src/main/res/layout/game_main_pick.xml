@@ -23,7 +23,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="53dp"
+        android:layout_height="65dp"
         android:weightSum="4">
 
 
@@ -34,6 +34,7 @@
             android:id="@+id/leftButton"
             android:layout_weight="1"
             android:background="@drawable/left_arrow"
+            android:onClick="moveLeft"
             />
 
         <Button
@@ -61,13 +62,14 @@
             android:id="@+id/rightButton"
             android:layout_weight="1"
             android:background="@drawable/right_arrow"
+            android:onClick="moveRight"
             />
     </LinearLayout>
 
-    <com.example.administrator.a1_person_project.CardView
+    <Views.CardBackView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/cardView"
+        android:id="@+id/cardBackView"
         />
 
 </LinearLayout>

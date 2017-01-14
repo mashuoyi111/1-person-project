@@ -1,4 +1,4 @@
-package com.example.administrator.a1_person_project;
+package Views;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +14,8 @@ import android.os.SystemClock;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.administrator.a1_person_project.MainGame;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -21,20 +23,29 @@ import Cards.Card;
 import Cards.Cards;
 
 
+
 /**
- * Created by Administrator on 2017/1/12.
+ * Created by Administrator on 2017/1/11.
  */
 
-public class CardBackView extends View {
+public class CardView extends View {
     Context context;
     private Cards cards;
+    private int screenWidth;
+    private int cardGap;
 
-    public CardBackView(Context context,AttributeSet attrs) {
+    public CardView(Context context,AttributeSet attrs) {
         super(context);
         this.context=context;
         cards=new Cards(context,new ArrayList<Card>());
         MainGame host=(MainGame) this.getContext();
         cards=host.getCards();
+        screenWidth=host.getScreenWidth();
+        setCardGap(screenWidth);
+    }
+
+    private void setCardGap(int screenWidth) {
+        cardGap=(70*screenWidth)/1080;
     }
 
 
@@ -56,9 +67,9 @@ public class CardBackView extends View {
                 for (int i = 0; i < numofcards; i++) {
                     Card cardTemp = cards.getCards().get(i);
                     if (i < botnum) {
-                        canvas.drawBitmap(cardTemp.getCardPic(), i * 70, heightTempB, null);
+                        canvas.drawBitmap(cardTemp.getCardPic(), i * cardGap, heightTempB, null);
                     } else {
-                        canvas.drawBitmap(cardTemp.getCardPic(), (i - botnum) * 70, heightTempT, null);
+                        canvas.drawBitmap(cardTemp.getCardPic(), (i - botnum) * cardGap, heightTempT, null);
                     }
                 }
 
@@ -67,11 +78,7 @@ public class CardBackView extends View {
                 //heightTemp is the height that make the cards display at 3/4 of the screen;
                 for (int i = 0; i < numofcards; i++) {
                     Card cardTemp = cards.getCards().get(i);
-                    canvas.drawBitmap(cardTemp.getCardPic(), i * 70, heightTemp, null);
-                    Paint paint = new Paint();
-                    paint.setColor(Color.BLACK);
-                    paint.setTextSize(100);
-
+                    canvas.drawBitmap(cardTemp.getCardPic(), i * cardGap, heightTemp, null);
                 }
 
             }

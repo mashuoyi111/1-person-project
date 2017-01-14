@@ -26,10 +26,11 @@ public class MainGame extends AppCompatActivity {
     private ArrayList<Player> players=new ArrayList<Player>();
     private Deck deck;
     private DisplayMetrics displaymetrics=new DisplayMetrics();
-    Cards currentCards;
-    Cards opponentCards;
-    Player currentPlayer;
-    Player opponentPlayer;
+    private int currentSelector;
+    private Cards currentCards;
+    private Cards opponentCards;
+    private Player currentPlayer;
+    private Player opponentPlayer;
     boolean cancelledOut;
     private int screenHeight;
     private int screenWidth;
@@ -45,11 +46,17 @@ public class MainGame extends AppCompatActivity {
         deck=new Deck(this,1,screenHeight,screenWidth);
         cancelledOut=false;
         Cards cds=deck.getCards(27);
+        Cards opcds=deck.getCards(26);
         this.currentCards =cds;
+        this.opponentCards=opcds;
+        this.currentSelector=0;
         setContentView(R.layout.game_main);
 
     }
 
+    public int getCurrentSelector() {
+        return currentSelector;
+    }
 
     public Deck getDeck() {
         return deck;
@@ -58,6 +65,11 @@ public class MainGame extends AppCompatActivity {
     public Cards getCards() {
         return currentCards;
     }
+
+    public Cards getOpponentCards() {
+        return opponentCards;
+    }
+
 
     public int getScreenWidth() {
         return screenWidth;
@@ -95,6 +107,12 @@ public class MainGame extends AppCompatActivity {
         cancelledOut=true;
         Button b=(Button) findViewById(R.id.buttonCancelOut);
         b.setText("Pick one card from another Player!");
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.game_main_pick);
+            }
+        });
     //    onContentChanged();
     }
 
@@ -108,7 +126,25 @@ public class MainGame extends AppCompatActivity {
         currentCards.orderCards();
 //        currentCards=currentCards.getBackCopy();
         setContentView(R.layout.game_main);
+
     }
+
+
+    public void moveLeft(View view){
+        if(currentSelector>0){
+            currentSelector--;
+            setContentView(R.layout.game_main_pick);
+        }
+
+    }
+
+    public void moveRight(View view){
+        if(currentSelector<opponentCards.getNumOfCards()-1){
+            currentSelector++;
+            setContentView(R.layout.game_main_pick);
+        }
+    }
+
 
     @Override
     public Resources getResources() {
@@ -128,7 +164,7 @@ public class MainGame extends AppCompatActivity {
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    setContentView(R.layout.game_main_pick);
                 }
             });
         }

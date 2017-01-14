@@ -1,8 +1,9 @@
-package com.example.administrator.a1_person_project;
+package Views;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,6 +15,9 @@ import android.os.SystemClock;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.administrator.a1_person_project.MainGame;
+import com.example.administrator.a1_person_project.R;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -21,29 +25,48 @@ import Cards.Card;
 import Cards.Cards;
 
 
-
 /**
- * Created by Administrator on 2017/1/11.
+ * Created by Administrator on 2017/1/12.
  */
 
-public class CardView extends View {
+public class CardBackView extends View {
     Context context;
     private Cards cards;
     private int screenWidth;
+    private int screenHeight;
+    private int cardHeight;
+    private int cardWidth;
+    private int selector;
     private int cardGap;
+    private Bitmap cardBack;
+    private Bitmap cardBackSelected;
 
-    public CardView(Context context,AttributeSet attrs) {
+    public CardBackView(Context context,AttributeSet attrs) {
         super(context);
         this.context=context;
         cards=new Cards(context,new ArrayList<Card>());
         MainGame host=(MainGame) this.getContext();
-        cards=host.getCards();
+        cards=host.getOpponentCards();
         screenWidth=host.getScreenWidth();
+        screenHeight=host.getScreenHeight();
+        selector=host.getCurrentSelector();
         setCardGap(screenWidth);
+        setCardSize(screenHeight,screenWidth);
+        cardBack=Bitmap.createScaledBitmap(getBitmapFromFile(R.drawable.card_back),cardWidth,cardHeight,false);
+        cardBackSelected=Bitmap.createScaledBitmap(getBitmapFromFile(R.drawable.card_back_selected),cardWidth,cardHeight,false);
+    }
+
+    private void setCardSize(int screenHeight, int screenWidth) {
+        cardHeight=(551*screenHeight)/1920;
+        cardWidth=(380*screenWidth)/1080;
     }
 
     private void setCardGap(int screenWidth) {
         cardGap=(70*screenWidth)/1080;
+    }
+
+    private Bitmap getBitmapFromFile(int id){
+        return BitmapFactory.decodeResource(context.getResources(),id);
     }
 
 
@@ -65,9 +88,13 @@ public class CardView extends View {
                 for (int i = 0; i < numofcards; i++) {
                     Card cardTemp = cards.getCards().get(i);
                     if (i < botnum) {
-                        canvas.drawBitmap(cardTemp.getCardPic(), i * cardGap, heightTempB, null);
+                        if(i!=selector) {
+                            canvas.drawBitmap(cardBack, i * cardGap, heightTempB, null);
+                        }else {canvas.drawBitmap(cardBackSelected, i * cardGap, heightTempB, null);}
                     } else {
-                        canvas.drawBitmap(cardTemp.getCardPic(), (i - botnum) * cardGap, heightTempT, null);
+                        if(i!=selector) {
+                            canvas.drawBitmap(cardBack, (i - botnum) * cardGap, heightTempT, null);
+                        }else {canvas.drawBitmap(cardBackSelected, (i - botnum) * cardGap, heightTempT, null);}
                     }
                 }
 
@@ -75,12 +102,9 @@ public class CardView extends View {
                 int heightTemp = canvas.getHeight()-cards.getCards().get(0).getCardPic().getHeight();
                 //heightTemp is the height that make the cards display at 3/4 of the screen;
                 for (int i = 0; i < numofcards; i++) {
-                    Card cardTemp = cards.getCards().get(i);
-                    canvas.drawBitmap(cardTemp.getCardPic(), i * cardGap, heightTemp, null);
-                    Paint paint = new Paint();
-                    paint.setColor(Color.BLACK);
-                    paint.setTextSize(100);
-
+                    if(i!=selector) {
+                        canvas.drawBitmap(cardBack, i * cardGap, heightTemp, null);
+                    }else{canvas.drawBitmap(cardBackSelected, i * cardGap, heightTemp, null);}
                 }
 
             }

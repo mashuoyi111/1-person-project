@@ -42,8 +42,6 @@ public class MainGame extends AppCompatActivity {
     boolean cancelledOut;
     private int screenHeight;
     private int screenWidth;
-//    public final Bitmap cardBack=Bitmap.createScaledBitmap(BitmapFactory.decodeResource
-//            (this.getResources(),R.drawable.card_back),380,551,false);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +57,16 @@ public class MainGame extends AppCompatActivity {
         setPlayersNames(names);
         cancelledOut=false;
         this.currentSelector=0;
-        setContentView(R.layout.game_main);
+        createANewGame();
 
+    }
+
+    private void createANewGame(){
+        setContentView(R.layout.game_pass_phone);
+        TextView nextPlayer= (TextView) findViewById(R.id.passPhoneInfo);
+        Button b = (Button) findViewById(R.id.playerConfirmed);
+        b.setText("Yeah, I am " + currentPlayer.getName());
+        nextPlayer.setText("please pass the phone to " + currentPlayer.getName());
     }
 
     private void setPlayersNames(ArrayList<String> names) {
@@ -194,17 +200,6 @@ public class MainGame extends AppCompatActivity {
             setContentView(R.layout.game_main);
         }
         cancelledOut=true;
-//        if(currentPlayer.isFirstRound()) {
-//            Button b = (Button) findViewById(R.id.buttonCancelOut);
-//            b.setText("Pick one card from another Player!");
-//            b.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    currentPlayer.setFirstRound(false);
-//                    setContentView(R.layout.game_main_pick);
-//                }
-//            });
-//        }else{
             Button b = (Button) findViewById(R.id.buttonCancelOut);
             b.setText("I'm done with my cards");
             b.setOnClickListener(new View.OnClickListener() {
@@ -330,7 +325,7 @@ public class MainGame extends AppCompatActivity {
 
     public void moveRight(View view){
 
-            if(currentSelector==13) {
+            if(opponentCards.getNumOfCards()<=14&&currentSelector==opponentCards.getNumOfCards()-1) {
                 currentSelector = 0;
                 setContentView(R.layout.game_main_pick);
             }else if(opponentCards.getNumOfCards()>14&&currentSelector==opponentCards.getNumOfCards()-1){
@@ -386,9 +381,16 @@ public class MainGame extends AppCompatActivity {
 
             setContentView(R.layout.game_main);
         }else{
-            setContentView(R.layout.game_main_pick);
+            setContentView(R.layout.game_before_main);
+            TextView t=(TextView) findViewById(R.id.gameBeforeMainText);
+            t.setText("Hi, "+currentPlayer.getName()+". Please check your cards. You will pick "+opponentPlayer.getName()+"'s cards.");
         }
 
+    }
+
+
+    public void loadToPick(View view){
+        setContentView(R.layout.game_main_pick);
     }
 
     public void backToMainMenu(View view){
@@ -413,7 +415,7 @@ public class MainGame extends AppCompatActivity {
         super.setContentView(id);
         if(id==R.layout.game_main){
             TextView t1=(TextView)findViewById(R.id.gameMainText);
-            t1.setText("Hi, "+currentPlayer.getName()+". You have to cancel out before picking a card.");
+            t1.setText("Hi, "+currentPlayer.getName()+". You have to cancel out before going further.");
         }
 
         if(cancelledOut&&id==R.layout.game_main) {

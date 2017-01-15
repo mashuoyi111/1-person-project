@@ -133,9 +133,11 @@ public class MainGame extends AppCompatActivity {
                     Player temp2=new Player("",deck.getCards(21));
                     Player temp3=new Player("",deck.getCards(21));
                     Player temp4=new Player("",deck.getCards(21));
+                    players.add(temp);
                     players.add(temp1);
                     players.add(temp2);
-                    players.add(temp);
+                    players.add(temp3);
+                    players.add(temp4);
                     }
                     break;
             case 6:

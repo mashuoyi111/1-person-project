@@ -33,7 +33,6 @@ import Cards.Cards;
 public class CardsBackView extends View {
     Context context;
     private Cards cards;
-    private int screenWidth;
     private int selector;
     private int cardGap;
     private Bitmap cardBack;
@@ -45,7 +44,6 @@ public class CardsBackView extends View {
         cards=new Cards(context,new ArrayList<Card>());
         MainGame host=(MainGame) this.getContext();
         cards=host.getOpponentCards();
-        screenWidth=host.getScreenWidth();
         selector=host.getCurrentSelector();
         cardGap=Deck.getCardGap();
         cardBack=Deck.getBack();

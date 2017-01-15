@@ -98,32 +98,36 @@ public class MainGame extends AppCompatActivity {
         switch (playerNum){
             case 2:
                 for(int i=0;i<1;i++){
-                    Player temp1=new Player("",deck.getCards(26));
-                    Player temp2=new Player("",deck.getCards(27));
+                    Player temp1=new Player("",deck.getCards(27));
+                    Player temp2=new Player("",deck.getCards(26));
                     players.add(temp1);
                     players.add(temp2);
                 }
                     break;
             case 3:
-                for(int i=0;i<1;i++){
+                if(true){
                     Player temp=new Player("",deck.getCards(18));
-                    Player temp1=new Player("",deck.getCards(17));
-                    Player temp2=new Player("",deck.getCards(18));
+                    Player temp1=new Player("",deck.getCards(18));
+                    Player temp2=new Player("",deck.getCards(17));
+                    players.add(temp);
                     players.add(temp1);
                     players.add(temp2);
-                    players.add(temp);
                 }
                     break;
             case 4:
-                    for(int i=0;i<2;i++){
-                        Player temp1=new Player("",deck.getCards(26));
-                        Player temp2=new Player("",deck.getCards(27));
+                    if(true){
+                        Player temp1=new Player("",deck.getCards(27));
+                        Player temp2=new Player("",deck.getCards(26));
+                        Player temp3=new Player("",deck.getCards(26));
+                        Player temp4=new Player("",deck.getCards(26));
                         players.add(temp1);
                         players.add(temp2);
+                        players.add(temp3);
+                        players.add(temp4);
                     }
                     break;
             case 5:
-                for(int i=0;i<1;i++){
+                if(true){
                     Player temp=new Player("",deck.getCards(21));
                     Player temp1=new Player("",deck.getCards(21));
                     Player temp2=new Player("",deck.getCards(21));
@@ -135,11 +139,19 @@ public class MainGame extends AppCompatActivity {
                     }
                     break;
             case 6:
-                    for(int i=0;i<3;i++){
-                        Player temp1=new Player("",deck.getCards(26));
-                        Player temp2=new Player("",deck.getCards(27));
-                        players.add(temp1);
-                        players.add(temp2);
+                     if(true){
+                         Player temp1=new Player("",deck.getCards(27));
+                         Player temp2=new Player("",deck.getCards(26));
+                         Player temp3=new Player("",deck.getCards(26));
+                         Player temp4=new Player("",deck.getCards(26));
+                         Player temp5=new Player("",deck.getCards(26));
+                         Player temp6=new Player("",deck.getCards(26));
+                         players.add(temp1);
+                         players.add(temp2);
+                         players.add(temp3);
+                         players.add(temp4);
+                         players.add(temp5);
+                         players.add(temp6);
                     }
                     break;
                 }
@@ -235,10 +247,9 @@ public class MainGame extends AppCompatActivity {
                 b.setText("Yeah, I am " + currentPlayer.getName());
                 currentCards=currentPlayer.getCards();
                 opponentCards=opponentPlayer.getCards();
+                setCardsInfoWhenPassing();
             }else{
-                setContentView(R.layout.game_end);
-                TextView endgame= (TextView) findViewById(R.id.endGameText);
-                endgame.setText("Player "+players.get(0).getName()+" Lose!!!");
+                endGame();
             }
 
 
@@ -254,11 +265,10 @@ public class MainGame extends AppCompatActivity {
                     b.setText("Yeah, I am " + currentPlayer.getName());
                     currentCards=currentPlayer.getCards();
                     opponentCards=opponentPlayer.getCards();
+                    setCardsInfoWhenPassing();
                 }else{
                     players.add(opponentPlayer);
-                    setContentView(R.layout.game_end);
-                    TextView endgame= (TextView) findViewById(R.id.endGameText);
-                    endgame.setText("Player "+players.get(0).getName()+" Lose!!!");
+                    endGame();
                 }
             }
             if(opponentPlayer.isWin()){
@@ -269,15 +279,14 @@ public class MainGame extends AppCompatActivity {
                     currentPlayer = players.get(0);
                     opponentPlayer = players.get(1);
                     players.remove(0);
-                    players.remove(1);
+                    players.remove(0);
                     nextPlayer.setText("please pass the phone to " + currentPlayer.getName());
                     b.setText("Yeah, I am " + currentPlayer.getName());
                     currentCards=currentPlayer.getCards();
                     opponentCards=opponentPlayer.getCards();
+                    setCardsInfoWhenPassing();
                 }else{
-                    setContentView(R.layout.game_end);
-                    TextView endgame= (TextView) findViewById(R.id.endGameText);
-                    endgame.setText("Player "+players.get(0).getName()+" Lose!!!");
+                    endGame();
                 }
             }
         }
@@ -290,9 +299,57 @@ public class MainGame extends AppCompatActivity {
             b.setText("Yeah, I am "+ currentPlayer.getName());
             currentCards=currentPlayer.getCards();
             opponentCards=opponentPlayer.getCards();
+            setCardsInfoWhenPassing();
         }
 
     }
+
+    private void endGame() {
+        setContentView(R.layout.game_end);
+        TextView endgame= (TextView) findViewById(R.id.endGameText);
+        endgame.setText("Player "+players.get(0).getName()+" Lose!!!");
+        ArrayList<String> scores=new ArrayList<String>();
+        for(int i=0;i<wonPlayers.size();i++){
+            int score=wonPlayers.size()-i;
+            scores.add(wonPlayers.get(i).getName()+" : "+String.valueOf(score));
+        }
+        ListView t=(ListView)findViewById(R.id.playersScores);
+        ArrayAdapter a=new ArrayAdapter<String>(this,R.layout.game_list_view,R.id.textViewA,scores);
+        t.setAdapter(a);
+    }
+
+    private void setCardsInfoWhenPassing(){
+        TextView t1=(TextView)findViewById(R.id.currentPlayers);
+        TextView t2=(TextView)findViewById(R.id.wonPlayers);
+        ListView t3=(ListView)findViewById(R.id.playersCardInfo);
+        String t1str="";
+        String t2str="";
+        ArrayList<Player> playerList=new ArrayList<Player>();
+        playerList.add(currentPlayer);
+        playerList.add(opponentPlayer);
+        playerList.addAll(players);
+        for(int i=0;i<playerList.size();i++){
+            if(i<playerList.size()-1){
+                t1str+=(playerList.get(i).getName()+", ");
+            }else{t1str+=(playerList.get(i).getName()+".");}
+        }
+        for(int i=0;i<wonPlayers.size();i++){
+            if(i<wonPlayers.size()-1){
+                t2str+=(wonPlayers.get(i).getName()+", ");
+            }else{t2str+=(wonPlayers.get(i).getName()+".");}
+        }
+        t1.setText("Still playing: "+ t1str);
+        t2.setText("Won game: "+t2str);
+        ArrayList<String> strs=new ArrayList<String>();
+        strs.add("number of cards information:");
+        for(int i=1;i<=playerList.size();i++){
+            strs.add(playerList.get(i-1).getName()+": "+playerList.get(i-1).getCards().getNumOfCards().toString());
+        }
+        ArrayAdapter a=new ArrayAdapter<String>(this,R.layout.game_list_view,R.id.textViewA,strs);
+        t3.setAdapter(a);
+
+    }
+
 
 
     public void shuffleCards(View view){
@@ -394,10 +451,12 @@ public class MainGame extends AppCompatActivity {
     }
 
     public void backToMainMenu(View view){
-        Intent intent=new Intent();
-        intent.setClass(MainGame.this, MainActivity.class);
-        startActivity(intent);
+        Intent i = getBaseContext().getPackageManager()
+                .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
     }
+
 
 
 
@@ -434,42 +493,6 @@ public class MainGame extends AppCompatActivity {
             }
         }
 
-        if(id==R.layout.game_pass_phone){
-            TextView t1=(TextView)findViewById(R.id.currentPlayers);
-            TextView t2=(TextView)findViewById(R.id.wonPlayers);
-            ListView t3=(ListView)findViewById(R.id.playersCardInfo);
-            String t1str="";
-            String t2str="";
-            String t3str="";
-            ArrayList<Player> playerList=new ArrayList<Player>();
-            playerList.add(currentPlayer);
-            playerList.add(opponentPlayer);
-            playerList.addAll(players);
-            for(int i=0;i<playerList.size();i++){
-                if(i<playerList.size()-1){
-                t1str+=(playerList.get(i).getName()+", ");
-                }else{t1str+=(playerList.get(i).getName()+".");}
-            }
-            for(int i=0;i<wonPlayers.size();i++){
-                if(i<wonPlayers.size()-1){
-                    t2str.concat(wonPlayers.get(i).getName()+", ");
-                }else{t2str.concat(wonPlayers.get(i).getName()+".");}
-            }
-            t1.setText("Still playing: "+ t1str);
-            t2.setText("Won game: "+t2str);
-
-            int playerNum=playerList.size();
-            String[] str=new String[playerNum+1];
-            ArrayList<String> strs=new ArrayList<String>();
-            strs.add("number of cards information:");
-            for(int i=1;i<=playerNum;i++){
-                strs.add(playerList.get(i-1).getName()+": "+playerList.get(i-1).getCards().getNumOfCards().toString());
-            }
-            ArrayAdapter a=new ArrayAdapter<String>(this,R.layout.game_list_view,R.id.textViewA,strs);
-            t3.setAdapter(a);
-
-
-        }
         if(id==R.layout.game_main_pick){
             TextView t=(TextView)findViewById(R.id.picking);
             t.setText("you are picking from: "+opponentPlayer.getName());

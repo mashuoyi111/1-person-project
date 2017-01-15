@@ -11,7 +11,7 @@
         android:id="@+id/gameBeforeMainText" />
 
     <Button
-        android:text="I see, let me A pick card"
+        android:text="I see, let me pick A card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/goToPick"

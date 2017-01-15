@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startGame(View view){
+        setNumOfPeople(view);
         ArrayList<String> names=new ArrayList<String>();
         Intent intent=new Intent();
         intent.setClass(MainActivity.this, MainGame.class);

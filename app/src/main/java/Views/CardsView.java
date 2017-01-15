@@ -32,7 +32,6 @@ import Cards.Deck;
 public class CardsView extends View {
     Context context;
     private Cards cards;
-    private int screenWidth;
     private int cardGap;
 
     public CardsView(Context context, AttributeSet attrs) {
@@ -41,7 +40,6 @@ public class CardsView extends View {
         cards=new Cards(context,new ArrayList<Card>());
         MainGame host=(MainGame) this.getContext();
         cards=host.getCards();
-        screenWidth=host.getScreenWidth();
         cardGap= Deck.getCardGap();
     }
 

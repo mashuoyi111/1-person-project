@@ -10,16 +10,19 @@ import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int peopleNum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSpinner();
+        peopleNum=2;
     }
 
     public void setSpinner(){
         Spinner playerNum=(Spinner)findViewById(R.id.numberOfPlayers);
-        String[] playerOptions=new String[]{"1 player","2 players","3 players","4 players","5 players","6 players"};
+        String[] playerOptions=new String[]{"2 players","3 players","4 players","5 players","6 players"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, playerOptions);
         playerNum.setAdapter(adapter);
     }
@@ -27,7 +30,16 @@ public class MainActivity extends AppCompatActivity {
     public void startGame(View view){
         Intent intent=new Intent();
         intent.setClass(MainActivity.this, MainGame.class);
+        intent.putExtra("peopleNum",peopleNum);
         startActivity(intent);
+    }
+
+
+    public void setNumOfPeople(View view){
+        Spinner num=(Spinner) findViewById(R.id.numberOfPlayers);
+        if(num!=null){
+            peopleNum =num.getSelectedItemPosition()+2;
+        }
     }
 
     @Override

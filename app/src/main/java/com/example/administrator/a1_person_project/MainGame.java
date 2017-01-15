@@ -1,6 +1,7 @@
 package com.example.administrator.a1_person_project;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,7 +28,7 @@ public class MainGame extends AppCompatActivity {
 
     private ArrayList<Player> players=new ArrayList<Player>();
     private ArrayList<Player> wonPlayers=new ArrayList<Player>();
-    private int currentPlayerPointer;
+    private int playerNum;
     private Deck deck;
     private DisplayMetrics displaymetrics=new DisplayMetrics();
     private int currentSelector;
@@ -47,23 +48,86 @@ public class MainGame extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         screenHeight=displaymetrics.heightPixels;
         screenWidth=displaymetrics.widthPixels;
-        deck=new Deck(this,1,screenHeight,screenWidth);
+        Intent thisIntent=getIntent();
+        playerNum=thisIntent.getIntExtra("peopleNum",2);
+        setDeck(playerNum);
+        setPlayers(playerNum);
         cancelledOut=false;
-        Cards cds=deck.getCards(26);
-        Cards opcds=deck.getCards(27);
-        Player p1=new Player("P1",cds);
-        Player p2=new Player("p2",opcds);
-        players.add(p1);
-        players.add(p2);
-        currentPlayer=p1;
-        opponentPlayer=p2;
-        currentPlayerPointer=0;
-        this.currentCards =cds;
-        this.opponentCards=opcds;
         this.currentSelector=0;
         setContentView(R.layout.game_main);
 
     }
+
+
+    private void setDeck(int playerNum) {
+        if(playerNum>5) {
+            deck = new Deck(this, 3, screenHeight, screenWidth);
+        }else if(playerNum>3){
+            deck = new Deck(this, 2, screenHeight, screenWidth);
+        }else{
+            deck = new Deck(this, 1, screenHeight, screenWidth);
+        }
+
+    }
+
+
+    private void setPlayers(int playerNum) {
+        switch (playerNum){
+            case 2:
+                for(int i=0;i<1;i++){
+                    Player temp1=new Player("",deck.getCards(26));
+                    Player temp2=new Player("",deck.getCards(27));
+                    players.add(temp1);
+                    players.add(temp2);
+                }
+                    break;
+            case 3:
+                for(int i=0;i<1;i++){
+                    Player temp=new Player("",deck.getCards(18));
+                    Player temp1=new Player("",deck.getCards(17));
+                    Player temp2=new Player("",deck.getCards(18));
+                    players.add(temp1);
+                    players.add(temp2);
+                    players.add(temp);
+                }
+                    break;
+            case 4:
+                    for(int i=0;i<2;i++){
+                        Player temp1=new Player("",deck.getCards(26));
+                        Player temp2=new Player("",deck.getCards(27));
+                        players.add(temp1);
+                        players.add(temp2);
+                    }
+                    break;
+            case 5:
+                for(int i=0;i<1;i++){
+                    Player temp=new Player("",deck.getCards(21));
+                    Player temp1=new Player("",deck.getCards(21));
+                    Player temp2=new Player("",deck.getCards(21));
+                    Player temp3=new Player("",deck.getCards(21));
+                    Player temp4=new Player("",deck.getCards(21));
+                    players.add(temp1);
+                    players.add(temp2);
+                    players.add(temp);
+                    }
+                    break;
+            case 6:
+                    for(int i=0;i<3;i++){
+                        Player temp1=new Player("",deck.getCards(26));
+                        Player temp2=new Player("",deck.getCards(27));
+                        players.add(temp1);
+                        players.add(temp2);
+                    }
+                    break;
+                }
+        currentPlayer=players.get(0);
+        opponentPlayer=players.get(1);
+        currentCards=currentPlayer.getCards();
+        opponentCards=opponentPlayer.getCards();
+
+
+    }
+
 
     public int getCurrentSelector() {
         return currentSelector;
@@ -111,7 +175,7 @@ public class MainGame extends AppCompatActivity {
             }
         }
 
-        if(addTemp.size()>0) {
+        if(addTemp.size()!=size) {
             currentCards.setCards(addTemp);
             setContentView(R.layout.game_main);
         }
@@ -153,11 +217,28 @@ public class MainGame extends AppCompatActivity {
         if(currentPlayer.isWin()||opponentPlayer.isWin()){
         if(currentPlayer.isWin()&&opponentPlayer.isWin()){
             wininfo.setText("Your pick made you both Win!");
+            wonPlayers.add(currentPlayer);
+            wonPlayers.add(opponentPlayer);
+            if(players.size()>=2){
+                currentPlayer=players.get(0);
+                opponentPlayer=players.get(1);
+                nextPlayer.setText("please pass the phone to " + currentPlayer.getName());
+                b.setText("Yeah, I am " + currentPlayer.getName());
+                currentCards=currentPlayer.getCards();
+                opponentCards=opponentPlayer.getCards();
+            }else{
+                setContentView(R.layout.game_end);
+                TextView endgame= (TextView) findViewById(R.id.endGameText);
+                endgame.setText("Player "+players.get(0).getName()+" Lose!!!");
+            }
+
+
         }else{
             if(currentPlayer.isWin()){
                 wininfo.setText("You Win the game!");
-                currentPlayer=opponentPlayer;
+                wonPlayers.add(currentPlayer);
                 if(players.size()>0){
+                    currentPlayer=opponentPlayer;
                     opponentPlayer = players.get(0);
                     players.remove(0);
                     nextPlayer.setText("please pass the phone to " + currentPlayer.getName());
@@ -165,11 +246,15 @@ public class MainGame extends AppCompatActivity {
                     currentCards=currentPlayer.getCards();
                     opponentCards=opponentPlayer.getCards();
                 }else{
-                    System.exit(0);
+                    players.add(opponentPlayer);
+                    setContentView(R.layout.game_end);
+                    TextView endgame= (TextView) findViewById(R.id.endGameText);
+                    endgame.setText("Player "+players.get(0).getName()+" Lose!!!");
                 }
             }
             if(opponentPlayer.isWin()){
                 wininfo.setText("Your pick made "+opponentPlayer.getName()+" Win!" );
+                wonPlayers.add(opponentPlayer);
                 players.add(currentPlayer);
                 if(players.size()>=2) {
                     currentPlayer = players.get(0);
@@ -181,7 +266,9 @@ public class MainGame extends AppCompatActivity {
                     currentCards=currentPlayer.getCards();
                     opponentCards=opponentPlayer.getCards();
                 }else{
-                    System.exit(0);
+                    setContentView(R.layout.game_end);
+                    TextView endgame= (TextView) findViewById(R.id.endGameText);
+                    endgame.setText("Player "+players.get(0).getName()+" Lose!!!");
                 }
             }
         }
@@ -287,6 +374,12 @@ public class MainGame extends AppCompatActivity {
             setContentView(R.layout.game_main_pick);
         }
 
+    }
+
+    public void backToMainMenu(View view){
+        Intent intent=new Intent();
+        intent.setClass(MainGame.this, MainActivity.class);
+        startActivity(intent);
     }
 
 

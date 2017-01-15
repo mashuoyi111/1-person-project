@@ -9,12 +9,19 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -42,6 +49,7 @@ public class MainGame extends AppCompatActivity {
     boolean cancelledOut;
     private int screenHeight;
     private int screenWidth;
+    PopupWindow p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -469,7 +477,22 @@ public class MainGame extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        LinearLayout r=(LinearLayout) findViewById(R.id.activity_main);
+        LayoutInflater layout=(LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        ViewGroup containter=(ViewGroup) layout.inflate(R.layout.activity_exit,null);
+        this.p=new PopupWindow(containter,700,300,false);
+        this.p.showAtLocation(r, Gravity.CENTER,0,0);
+        Button close=(Button) containter.findViewById(R.id.closePopButton);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                p.dismiss();
+            }
+        });
     }
+
+
+
 
     @Override
     public void setContentView(int id){

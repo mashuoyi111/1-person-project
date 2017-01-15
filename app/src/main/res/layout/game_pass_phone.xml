@@ -5,6 +5,7 @@
     android:layout_marginTop="10sp"
     android:layout_marginLeft="10sp"
     android:layout_marginRight="10sp"
+    android:id="@+id/activity_main"
     >
 
     <TextView
@@ -27,6 +28,7 @@
         android:textSize="25sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#F00"
         android:id="@+id/winInfo" />
 
     <TextView

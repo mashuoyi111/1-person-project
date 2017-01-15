@@ -54,5 +54,183 @@
         android:onClick="setNumOfPeople"
         />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:weightSum="2"
+        android:layout_marginBottom="21dp"
+        android:layout_below="@+id/setPeople">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:weightSum="6"
+            android:layout_above="@+id/p2name"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:text="P1 name:"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/p1text"
+                android:layout_below="@+id/setPeople"
+                android:layout_toLeftOf="@+id/numberOfPlayers"
+                android:layout_toStartOf="@+id/numberOfPlayers"
+                android:layout_above="@+id/p2name" />
+
+            <TextView
+                android:text="P2 name:"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/p2text"
+                 />
+
+            <TextView
+                android:text="P3 name:"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/p3text"
+                 />
+
+            <TextView
+                android:text="P4 name:"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/p4text"
+                />
+
+            <TextView
+                android:text="P5 name:"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:id="@+id/p5text"
+                />
+
+            <TextView
+                android:text="P6 name:"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/p6text"
+                 />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:weightSum="6">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="player1"
+                android:ems="10"
+                android:layout_weight="1"
+                android:layout_below="@+id/setPeople"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/p1name" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="player2"
+                android:ems="10"
+                android:layout_weight="1"
+                android:layout_below="@+id/p1name"
+                android:layout_alignLeft="@+id/p1name"
+                android:layout_alignStart="@+id/p1name"
+                android:id="@+id/p2name" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="player3"
+                android:visibility="invisible"
+                android:ems="10"
+                android:layout_weight="1"
+                android:layout_below="@+id/p2name"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/p3name" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="player4"
+                android:ems="10"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:layout_below="@+id/p3name"
+                android:layout_alignLeft="@+id/p3name"
+                android:layout_alignStart="@+id/p3name"
+                android:id="@+id/p4name" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="player5"
+                android:visibility="invisible"
+                android:ems="10"
+                android:layout_weight="1"
+                android:layout_below="@+id/p4name"
+                android:layout_alignLeft="@+id/p4name"
+                android:layout_alignStart="@+id/p4name"
+                android:id="@+id/p5name" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="player6"
+                android:visibility="invisible"
+                android:ems="10"
+                android:layout_weight="1"
+                android:layout_below="@+id/p5name"
+                android:layout_alignLeft="@+id/p5name"
+                android:layout_alignStart="@+id/p5name"
+                android:id="@+id/p6name" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </RelativeLayout>

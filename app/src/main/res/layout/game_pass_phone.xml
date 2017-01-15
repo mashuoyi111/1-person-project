@@ -28,4 +28,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/winInfo" />
+
+    <TextView
+        android:text=""
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/currentPlayers" />
+
+
+    <TextView
+        android:text=""
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/wonPlayers" />
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/playersCardInfo"
+        />
 </LinearLayout>

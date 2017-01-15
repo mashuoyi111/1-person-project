@@ -23,8 +23,11 @@ public class Deck {
     private int screenWidth;
     private int cardHeight;
     private int cardWidth;
-    public static Bitmap back;
-    public static Bitmap backSelected;
+    private static int cardGap;
+    private static int oneCardHeight;
+    private static int oneCardWidth;
+    private static Bitmap back;
+    private static Bitmap backSelected;
 
     public Deck(Context context, int numOfDeck,int height, int width){
         this.context=context;
@@ -41,6 +44,9 @@ public class Deck {
     private void setCardSize(int screenHeight, int screenWidth) {
         cardHeight=(551*screenHeight)/1920;
         cardWidth=(380*screenWidth)/1080;
+        cardGap=(70*screenWidth)/1080;
+        oneCardHeight=(1080*screenWidth)/1080;
+        oneCardWidth=(747*screenWidth)/1080;
     }
 
     public ArrayList<Card> getDeck() {
@@ -272,5 +278,26 @@ public class Deck {
 
     public void shuffleCards(){
         Collections.shuffle(deck);
+    }
+
+
+    public static Bitmap getBack() {
+        return back;
+    }
+
+    public static Bitmap getBackSelected() {
+        return backSelected;
+    }
+
+    public static int getOneCardHeight() {
+        return oneCardHeight;
+    }
+
+    public static int getOneCardWidth() {
+        return oneCardWidth;
+    }
+
+    public static int getCardGap() {
+        return cardGap;
     }
 }

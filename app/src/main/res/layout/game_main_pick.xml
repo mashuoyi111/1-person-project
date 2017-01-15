@@ -7,7 +7,7 @@
 
     <TextView
         android:text="TextView"
-        android:textSize="40px"
+        android:textSize="30sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView2" />
@@ -16,8 +16,8 @@
         android:text="Pick this card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonCancelOut"
-        android:onClick="cancelOut" />
+        android:id="@+id/pickOneCard"
+        android:onClick="pickCard" />
 
 
     <LinearLayout
@@ -68,7 +68,7 @@
             />
     </LinearLayout>
 
-    <Views.CardBackView
+    <Views.CardsBackView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/cardBackView"

@@ -41,15 +41,7 @@ public class Cards{
         return cards.get(index);
     }
 
-    public Card pop(int index){
-        if(index>0||index<cards.size()) {
-            Card temp = cards.get(index);
-            cards.remove(index);
-            return temp;
-        }else{
-            return null;
-        }
-    }
+    public void removeCard(int index){cards.remove(index);}
 
     public void orderCards(){
         ArrayList<Card> temp=new ArrayList<Card>();
@@ -86,6 +78,10 @@ public class Cards{
 
     private Bitmap getBitmapFromFile(int id){
         return BitmapFactory.decodeResource(context.getResources(),id);
+    }
+
+    public void addCard(Card card){
+        cards.add(card);
     }
 
 }

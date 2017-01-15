@@ -36,7 +36,7 @@
         android:onClick="orderCards"
         android:id="@+id/button2" />
 
-    <Views.CardView
+    <Views.CardsView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/cardView"

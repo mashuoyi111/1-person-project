@@ -3,7 +3,6 @@ package Views;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -16,59 +15,36 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.administrator.a1_person_project.MainGame;
-import com.example.administrator.a1_person_project.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 import Cards.Card;
-import Cards.Deck;
 import Cards.Cards;
+import Cards.Deck;
+
 
 
 /**
- * Created by Administrator on 2017/1/12.
+ * Created by Administrator on 2017/1/11.
  */
 
-public class CardBackView extends View {
+public class CardsView extends View {
     Context context;
     private Cards cards;
     private int screenWidth;
-    private int screenHeight;
-    private int cardHeight;
-    private int cardWidth;
-    private int selector;
     private int cardGap;
-    private Bitmap cardBack;
-    private Bitmap cardBackSelected;
 
-    public CardBackView(Context context,AttributeSet attrs) {
+    public CardsView(Context context, AttributeSet attrs) {
         super(context);
         this.context=context;
         cards=new Cards(context,new ArrayList<Card>());
         MainGame host=(MainGame) this.getContext();
-        cards=host.getOpponentCards();
+        cards=host.getCards();
         screenWidth=host.getScreenWidth();
-        screenHeight=host.getScreenHeight();
-        selector=host.getCurrentSelector();
-        setCardGap(screenWidth);
-        setCardSize(screenHeight,screenWidth);
-        cardBack= Deck.back;
-        cardBackSelected=Deck.backSelected;
+        cardGap= Deck.getCardGap();
     }
 
-    private void setCardSize(int screenHeight, int screenWidth) {
-        cardHeight=(551*screenHeight)/1920;
-        cardWidth=(380*screenWidth)/1080;
-    }
-
-    private void setCardGap(int screenWidth) {
-        cardGap=(70*screenWidth)/1080;
-    }
-
-    private Bitmap getBitmapFromFile(int id){
-        return BitmapFactory.decodeResource(context.getResources(),id);
-    }
 
 
     public void setCards(Cards cards){
@@ -89,13 +65,9 @@ public class CardBackView extends View {
                 for (int i = 0; i < numofcards; i++) {
                     Card cardTemp = cards.getCards().get(i);
                     if (i < botnum) {
-                        if(i!=selector) {
-                            canvas.drawBitmap(cardBack, i * cardGap, heightTempB, null);
-                        }else {canvas.drawBitmap(cardBackSelected, i * cardGap, heightTempB, null);}
+                        canvas.drawBitmap(cardTemp.getCardPic(), i * cardGap, heightTempB, null);
                     } else {
-                        if(i!=selector) {
-                            canvas.drawBitmap(cardBack, (i - botnum) * cardGap, heightTempT, null);
-                        }else {canvas.drawBitmap(cardBackSelected, (i - botnum) * cardGap, heightTempT, null);}
+                        canvas.drawBitmap(cardTemp.getCardPic(), (i - botnum) * cardGap, heightTempT, null);
                     }
                 }
 
@@ -103,9 +75,8 @@ public class CardBackView extends View {
                 int heightTemp = canvas.getHeight()-cards.getCards().get(0).getCardPic().getHeight();
                 //heightTemp is the height that make the cards display at 3/4 of the screen;
                 for (int i = 0; i < numofcards; i++) {
-                    if(i!=selector) {
-                        canvas.drawBitmap(cardBack, i * cardGap, heightTemp, null);
-                    }else{canvas.drawBitmap(cardBackSelected, i * cardGap, heightTemp, null);}
+                    Card cardTemp = cards.getCards().get(i);
+                    canvas.drawBitmap(cardTemp.getCardPic(), i * cardGap, heightTemp, null);
                 }
 
             }
